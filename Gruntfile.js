@@ -2,18 +2,25 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     eslint: {
-      target: [] // TODO: file names to be added
+      options: {
+        configFile: '.eslintrc'
+      },
+      target: ['*.js', 'src/**/*.js', '!Gruntfile.js', '!index.android.js']
     },
     tslint: {
       files: {
-        src: [] // TODO: file names to be added
+        src: ['src/**/*.ts', 'src/**/*.tsx', '!src/index.android.tsx']
       }
     },
-    ts: {
-      default: {
-        src: []
-        // out: , TODO: file to output compiled code to
-        // watch: TODO: files/directory to watch for changes
+    exec: {
+      scribe: {
+        cmd: 'tsc'
+      }
+    },
+    watch: {
+      scripts: {
+        files: ['src/**/*.ts', 'src/**/*.tsx'],
+        tasks: ['tslint', 'exec']
       }
     }
   });
@@ -21,8 +28,10 @@ module.exports = function (grunt) {
   // loading modules
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-tslint');
-  grunt.loadNpmTasks('grunt-ts');
+  grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   // additional tasks
-  grunt.registerTask('build', ['ts']); // TODO:
-  grunt.registerTask('default', ['eslint', 'tslint']); // TODO:
+  grunt.registerTask('default', ['eslint', 'tslint', 'exec', 'watch']);
+  grunt.registerTask('lint', ['eslint', 'tslint']);
+  grunt.registerTask('build', ['tslint', 'exec']);
 };
