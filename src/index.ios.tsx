@@ -21,6 +21,19 @@ interface State {
 }
 
 export default class Scribe extends Component<Props, State> {
+  getMessages() {
+    // fetch('127.0.0.1:8000/messages', {
+    //   method:'GET',
+    //   headers:{},
+    //   body:{}
+    // })
+    // .then((response) => response.json())
+    // .then((responseData) => {
+    //   return "restponse" + JSON.stringify(responseData);
+    // })
+    return "restponse";
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -33,6 +46,7 @@ export default class Scribe extends Component<Props, State> {
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{"\n"}
           Cmd+D or shake for dev menu
+          {getMessages()}
         </Text>
       </View>
     );
