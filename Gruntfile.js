@@ -5,7 +5,7 @@ module.exports = function (grunt) {
       options: {
         configFile: '.eslintrc'
       },
-      target: ['*.js', 'src/**/*.js', '!Gruntfile.js', '!index.android.js']
+      target: ['*.js', 'src/**/*.js', '!Gruntfile.js', '!index.android.js, !index.ios.js']
     },
     tslint: {
       files: {
@@ -32,6 +32,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   // additional tasks
   grunt.registerTask('default', ['eslint', 'tslint', 'exec', 'watch']);
-  grunt.registerTask('lint', ['eslint', 'tslint']);
+  grunt.registerTask('test', ['eslint', 'tslint']);
   grunt.registerTask('build', ['tslint', 'exec']);
 };
