@@ -9,8 +9,14 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TextInput,
+  // MapView
 } from "react-native";
+import { MapView } from "react-native";
+// import MapView from 'react-native-maps';
+// const MapView = require("react-native-maps");
+// let MapView = require('react-native-maps');
 
 interface Props {
 
@@ -23,7 +29,22 @@ interface State {
 export default class Scribe extends Component<Props, State> {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+
+      <MapView
+        style={{height: 200, margin: 40}}
+        showsUserLocation={true}
+         region={{
+           latitude: 37.78825,
+           longitude: -122.4324,
+           latitudeDelta: 0.015,
+           longitudeDelta: 0.0121,
+         }}
+       >
+       </MapView>
+
+        <TextInput  style={{height: 40, borderColor: "gray", borderWidth: 1}} onSubmitEditing={(text: any) => this.postMessage( text.nativeEvent.text  )}/>
+
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
