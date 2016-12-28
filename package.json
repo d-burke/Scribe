@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "grunt test"
   },
   "dependencies": {
     "@types/react": "^0.14.55",
