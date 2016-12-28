@@ -20,7 +20,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ['src/**/*.ts', 'src/**/*.tsx'],
-        tasks: ['tslint', 'exec']
+        tasks: ['eslint', 'tslint', 'exec']
       }
     }
   });
