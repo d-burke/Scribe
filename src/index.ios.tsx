@@ -11,7 +11,6 @@ import {
   Text,
   View
 } from "react-native";
-
 interface Props {
 
 }
@@ -21,17 +20,23 @@ interface State {
 }
 
 export default class Scribe extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {};
+  }
+
   getMessages() {
-    // fetch('127.0.0.1:8000/messages', {
-    //   method:'GET',
-    //   headers:{},
-    //   body:{}
-    // })
-    // .then((response) => response.json())
-    // .then((responseData) => {
-    //   return "restponse" + JSON.stringify(responseData);
-    // })
-    return "restponse";
+    let dataResponse;
+    fetch("http://127.0.0.1:8000/messages", {
+      method: "GET"
+    })
+    .then((response: any) => response.json())
+    .then((responseData: any) => {
+      this.setState({
+        data: "restponse" + JSON.stringify(responseData)
+      });
+    });
+    // return dataResponse;
   }
 
   render() {
@@ -45,8 +50,9 @@ export default class Scribe extends Component<Props, State> {
         </Text>
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{"\n"}
-          Cmd+D or shake for dev menu
-          {getMessages()}
+          Cmd+D or shake for dev menu{"\n"}
+          {this.getMessages()}
+          {this.state.data}
         </Text>
       </View>
     );
