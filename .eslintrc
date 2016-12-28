@@ -1,11 +1,8 @@
 {
   "extends": "airbnb",
   "rules": {
-    "strict": ["warn", "never"],
-    "import/no-unresolved": ["warn", { commonjs: true, caseSensitive: true }],
-    "import/extensions": ["warn", "always", {
-      js: "never",
-      jsx: "never"
-    }]
+    "comma-dangle": ["error", "never"],
+    "import/newline-after-import": 0,
+    "object-shorthand": ['error', 'consistent']
   }
 }
