@@ -23,10 +23,57 @@ interface Props {
 }
 
 interface State {
-
+  data: string;
 }
 
 export default class Scribe extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      data: "loading"
+    };
+    // this.state: State = {
+    //   data: "loading"
+    // };
+  }
+
+  componentWillMount() {
+    this.getMessages();
+  }
+
+  getMessages() {
+    fetch("http://127.0.0.1:8000/messages", {
+      method: "GET"
+    })
+    .then((response: any) => response.json())
+    .then((responseData: any) => {
+      this.setState({
+        data: JSON.stringify(responseData)
+      });
+    });
+  }
+
+  postMessage(text: string) {
+    fetch("http://127.0.0.1:8000/messages", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: text,
+      })
+    })
+    // .then((response: any) => response.json())
+    .then((responseData: any) => {
+      this.getMessages();
+    });
+  }
+
+  sayStuff(stuff: string) {
+    console.log("STUFF " + stuff);
+  }
+
   render() {
     return (
       <View>
@@ -53,7 +100,8 @@ export default class Scribe extends Component<Props, State> {
         </Text>
         <Text style={styles.instructions}>
           Press Cmd+R to reload,{"\n"}
-          Cmd+D or shake for dev menu
+          Cmd+D or shake for dev menu{"\n"}
+          {this.state.data}
         </Text>
       </View>
     );
